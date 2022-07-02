@@ -1,0 +1,148 @@
+{% extends 'component/base.html' %}
+{% load static %}
+{% block content %}
+{% load crispy_forms_tags %}
+<section class="contact_section ">
+    <div class="container">
+        <div class="row">
+            {% for message in messages %}
+            <div class="alert alert-{{message.tags}} alert-dismissble fade show" role="alert">
+                <strong>Message:</strong>{{message}}
+            </div>
+            {% endfor %}
+        </div>
+        <div class="row">
+
+            {% if post_list %}
+            <div class="col-lg-9">
+                <div class="row isotope">
+                    {% for post in post_list %}
+                    <div class="col-lg-4 col-md-6 grid-item shadow p-3" style="margin: 2%;">
+                        <!-- single blog wrap -->
+                        <div class="single-blog-wrap type4">
+                            <!-- post image -->
+                            <div class="single-blog-image text-center">
+                                <a href="{% url 'post:post_details' slug=post.slug %}">
+                                    <img src="{{ post.imageUrl }}" width="100px" height="100px" data-rjs="2" alt="">
+                                </a>
+                            </div>
+                            <!--End of  post image -->
+                            <!-- single blog details -->
+                            <div class="single-blogdetails text-center">
+                                <div class="post-heading">
+                                    <h4><a href="{% url 'post:post_details' slug=post.slug %}">{{ post.title }}</a></h4>
+                                </div>
+                                <div class="">
+                                    <!-- <p>
+                                        {{post.heading}}
+                                    </p> -->
+                                    <div class="post-info">
+                                        <ul class="list-unstyled mb-0">
+                                            <li>
+                                                <small> {{ post.post_comments.all.count  }} Comments </small>
+                                            </li>
+                                            <li>
+                                                <small> {{ post.likes.all.count }} likes </small>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="post-info">
+                                    <div class="single-blog-tag">
+                                    </div>
+                                    <div class="">
+                                        <ul class="list-unstyled mb-0" style="font-size: smaller;">
+                                            <li>
+                                                {{ post.created_at|date:"M d, Y" }}
+                                            </li>
+                                            <li>
+                                                By {{ post.author }}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <a href="{% url 'post:post_details' slug=post.slug %}" class="btn btn-line">
+                                    Continue Reading...
+                                </a>
+                            </div>
+                            <!-- End of single blog details -->
+                        </div>
+                        <!-- End of single blog wrap -->
+                    </div>
+                    {% endfor %}
+                </div>
+                <!-- Start of Pagination -->
+                {% if is_paginated %}
+                <div class="row">
+                    <div class="col-lg-9">
+                        <div class="card">
+                            <div class="card-body">
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination">
+                                        {% if page_obj.has_previous %}
+                                        <li class="page-item"><a class="page-link"
+                                                href="{% url 'post:post_list' %}?page={{ page_obj.previous_page_number }}">Previous</a>
+                                        </li>
+                                        {% else %}
+                                        <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                                        {% endif %}
+                                        {% for i in paginator.page_range %}
+                                        <li class="page-item {% if i == page_obj.number %}active{% endif %}"><a
+                                                class="page-link"
+                                                href="{% url 'post:post_list' %}?page={{ i }}">{{ i }}</a></li>
+                                        {% endfor %}
+                                        {% if page_obj.has_next %}
+                                        <li class="page-item"><a class="page-link"
+                                                href="{% url 'post:post_list' %}?page={{ page_obj.next_page_number }}">Next</a>
+                                        </li>
+                                        {% else %}
+                                        <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+                                        {% endif %}
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                <!-- end of Pagination -->
+            </div>
+            <div class="col-lg-3">
+                <aside>
+                    <!--Single sidebar widget -->
+                    <div class="single-sidebar-widget mb-60">
+                        <!-- widget title -->
+                        <div class="widget-title">
+                            <h4>Popular Posts</h4>
+                        </div>
+                        <!--End of widget title -->
+                        {% if popular_posts %}
+                        {% for pop_post in popular_posts %}
+                        <div class="populer-post">
+                            <ul class="list-unstyled mb-0">
+                                <!-- single populer post -->
+                                <li>
+                                    <h5><a
+                                            href="{% url 'post:post_details' slug=pop_post.slug %}">{{ pop_post.title }}</a>
+                                    </h5>
+                                    <p>by. {{pop_post.author}}
+                                    </p>
+                                </li>
+                                <!--End of single populer post -->
+                            </ul>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <!--End of Single sidebar widget -->
+
+                </aside>
+            </div>
+        </div>
+        {% else %}
+        <p> No posts available </p>
+        {% endif %}
+    </div>
+</section>
+
+{% endblock content %}

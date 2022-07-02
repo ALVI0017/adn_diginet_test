@@ -1,0 +1,150 @@
+{% extends 'component/base.html' %}
+{% load static %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+<section class="contact_section ">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <!-- post main content -->
+                <div class="post-main-content">
+                    <!-- post mata -->
+                    <div class="post-mata">
+                        <ul class="list-unstyled mb-0">
+                            <li>
+                                On.<a href="#"> {{ post.created_at|date:"M d, Y" }} </a>
+                            </li>
+                            <li>
+                                By.
+                                <a href="#"> {{post.author}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- End of post mata -->
+                    <!-- post main heading-->
+                    <div class="post-heading">
+                        <h2>{{ post.title }}</h2>
+                    </div>
+                    <!-- post main heading-->
+                    <!-- post image -->
+                    <div class="post-main-image">
+                        <img src="{{ post.imageUrl }}" width="300px" height="300px" data-rjs="2" alt="">
+                    </div>
+                    <!--End of  post image -->
+                </div>
+                <!-- End of post main content -->
+            </div>
+            <div class="col-lg-12">
+                <!--single post content body -->
+                <div class="post-main-content ">
+                    <div class="single-post-content">
+                        <b>Description:</b> {{post.description.html|safe}}
+                    </div>
+                </div>
+                <!-- End of single post content body -->
+            </div>
+            <div class="col-lg-12">
+                <!--single post content body -->
+                <div class="post-main-content ">
+                    <div class="single-post-content" style="width:100px">
+                        <div style="width:100px">
+                            {% if request.user.is_authenticated %}
+                            <form action="{% url 'post:like_post' post.slug %}" method="POST">
+                                {% csrf_token %}
+                                {% if liked %}
+                                <input type="image" src="{% static '' %}images/liked.png" name="submit" width="50px" />
+                                <!-- <button type="submit", name="slug", value="{{ post.slug }}" class="btn btn-primary"> 
+                                    Unlike
+                                </button> -->
+
+                                {% else %}
+                                <input type="image" src="{% static '' %}images/unliked.png" name="submit"
+                                    width="50px" />
+                                <!-- <button type="submit", name="slug", value="{{ post.slug }}" class="btn btn-primary"> 
+                                    Like
+                                </button> -->
+                                {% endif %}
+                                <span>
+                                    {{ like_count }}
+                                </span>
+                            </form>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- End of single post content body -->
+            </div>
+            <!-- share abd tag border -->
+
+            <div class="col-lg-12">
+                <div class="post-comments-wrap">
+                    <h4>Comments ({{ post.post_comments.all.count }})</h4>
+                    <!-- comment content-->
+                    <!-- comment form -->
+                    {% if user.is_authenticated %}
+                    <div class="comment-form-wrap">
+                        <div class="row">
+                            <div class="col-lg-11 offset-lg-1" style="padding-top: 4%;">
+                                <!-- commnet respond -->
+                                <form action="{% url 'post:post_comment' post.slug %}" method="POST">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <input type="text" aria-label="With textarea" class="form-control"
+                                            name="comment" placeholder="Leave you thoughts" required>
+                                    </div>
+                                    <button type="submit">
+                                        <b>Comment</b>
+                                    </button>
+                                </form>
+                                <!-- commnet respond -->
+                            </div>
+                        </div>
+                    </div>
+                    {%else%}
+                    <p>Please login to comment</p>
+                    {% endif %}
+                    <!-- End of comment form -->
+                    {% for comment in comments %}
+                    <div class="row">
+                        <div class="col-lg-11 offset-lg-1">
+                            <div class="single-post-comment-inner">
+                                <ul>
+                                    <li>
+                                        <!-- single post comment -->
+                                        <div class="d-flex single-post-comment">
+                                            <div class="avatar">
+                                                <div class="comment-author-image">
+
+                                                    <img src="" data-rjs="2" alt="">
+                                                </div>
+                                            </div>
+                                            <div class="avatar-details">
+                                                <h6>{{comment.user.username}}</h6><span class="commnet-time">
+                                                    {{ comment.created_at|timesince }}</span>
+                                                <p>
+                                                    {{comment.content}}
+                                                </p>
+
+
+                                            </div>
+                                        </div>
+                                        <!-- end of single post comment -->
+                                        <!-- single post comment -->
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <!-- End of single comment -->
+                </div>
+                <!-- End of post comments wrap -->
+            </div>
+        </div>
+
+
+    </div>
+</section>
+
+{% endblock content %}

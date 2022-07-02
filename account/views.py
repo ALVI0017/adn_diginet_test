@@ -1,15 +1,14 @@
 from django.shortcuts import render, redirect
-from django.views.generic import TemplateView, View
+from django.views.generic import View
 from django.views.generic.edit import CreateView
 from .forms import SignUpForm, LoginForm
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from django.urls import reverse_lazy
-from django.contrib.auth import logout, authenticate, login, update_session_auth_hash
+from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth import get_user_model
-User = get_user_model()
-users = User.objects.all()
 
+User = get_user_model()
 # Create your views here.
 
 

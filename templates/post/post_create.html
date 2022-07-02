@@ -1,0 +1,40 @@
+{% extends 'component/base.html' %}
+{% load static %}
+{% block content %}
+{% load crispy_forms_tags %}
+<section class="contact_section ">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="d-flex justify-content-center d-md-block">
+                    <h2>
+                        Create Post
+                    </h2>
+                </div>
+                {% for message in messages %}
+                <div class="alert alert-{{message.tags}} alert-dismissble fade show" role="alert">
+                    <strong>Message:</strong>{{message}}
+                </div>
+                {% endfor %}
+                <form method="POST" action="{% url 'post:post_create' %}" enctype="multipart/form-data">
+                    <div class="contact_form-container">
+                        {% csrf_token %}
+                        {{ form.title|as_crispy_field }}
+                        {{ form.description|as_crispy_field }}
+                        {{ form.image|as_crispy_field }}
+                        <button type="submit">
+                            Create Post
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <div class="contact_img-box">
+                    <img src="images/students.jpg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

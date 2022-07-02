@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
+    'django_quill',
+    'account',
+    'post'
 ]
 
 MIDDLEWARE = [
@@ -124,3 +127,6 @@ STATICFILES_DIRS = [Path.joinpath(BASE_DIR, 'static'), ]
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+MEDIA_DIR = Path.joinpath(BASE_DIR / 'media')
+MEDIA_ROOT = MEDIA_DIR
+MEDIA_URL = '/media/'
