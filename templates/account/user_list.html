@@ -8,28 +8,32 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="about_img-container">
-                        <img src="images/about.png" alt="">
+
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="about_detail-box">
-                        <h3>
-                            About our School
-                        </h3>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et
-                            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-                            ut
-                            aliquip
-                            ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                        </p>
-                        <div class="">
-                            <a href="" class="call_to-btn btn_white-border">
-                                Read More
-                            </a>
-                        </div>
-                    </div>
+                    <table style="width:100%">
+                        <tr>
+                            <th>Full Name</th>
+                            <th>User Name</th>
+                            <th>Email</th>
+                            <th>Date</th>
+                            <th>Action</th>
+                        </tr>
+                        {% for user in user_list %}
+                        {% if user.id != request.user.id %}
+                        <tr>
+                            <td>{{ user.first_name  }}{{ user.last_name  }}</td>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.date_joined|date:"M d, Y" }}</td>
+                            <td> <b><a style="color:red" href="{% url 'account:user_delete' user.id %}"> Delete</a></b>
+                            </td>
+                        </tr>
+                        {% endif %}
+
+                        {% endfor %}
+                    </table>
                 </div>
             </div>
         </div>

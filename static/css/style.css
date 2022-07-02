@@ -115,7 +115,7 @@ a:focus {
 }
 
 .sub_page .top_container::before {
-  background-color: #fdd31d;
+  background-color: #2c8a0a;
   background-image: none;
 }
 
@@ -126,7 +126,7 @@ a:focus {
   height: 75px;
   bottom: 20%;
   left: 6%;
-  background-color: #fdd31d;
+  background-color: #2c8a0a;
 }
 
 
@@ -263,7 +263,7 @@ a:focus {
 
 
 .admission_section a {
-  background-color: #fdd31d;
+  background-color: #2c8a0a;
   color: #fefeff;
 }
 
@@ -286,7 +286,7 @@ a:focus {
 
 
 .determine_section a {
-  background-color: #fdd31d;
+  background-color: #2c8a0a;
   color: #fefeff;
 }
 
@@ -307,7 +307,7 @@ a:focus {
 
 .client_section h5 {
   font-size: 24px;
-  color: #fdd31d;
+  color: #2c8a0a;
 }
 
 .client_section .row {
@@ -327,7 +327,7 @@ a:focus {
   width: 100px;
   height: 30px;
   border-radius: 20px;
-  background-color: #fdd31d;
+  background-color: #2c8a0a;
 }
 
 .client_img-box::before {
@@ -392,7 +392,7 @@ a:focus {
 }
 
 .client_section .carousel-indicators li.active {
-  background-color: #fdd31d;
+  background-color: #2c8a0a;
 }
 
 /* end client section */
@@ -467,7 +467,7 @@ a:focus {
 .info_logo-box h2 {
   font-weight: bold;
   padding: 5px 7px;
-  border-bottom: 1.5px solid #fdd31d;
+  border-bottom: 1.5px solid #2c8a0a;
 }
 
 .info_section ul {
@@ -484,7 +484,7 @@ a:focus {
 }
 
 .info_section ul li a:hover {
-  color: #fdd31d;
+  color: #2c8a0a;
 }
 
 .info_section h5 {
@@ -505,7 +505,7 @@ a:focus {
 }
 
 .info_section .form_container button {
-  background-color: #fdd31d;
+  background-color: #2c8a0a;
   border: none;
   outline: none;
   color: #fff;
@@ -539,7 +539,7 @@ a:focus {
 /* footer section*/
 
 .footer_section {
-  background-color: #d8b109;
+  background-color: #9ff8a5;
   padding: 20px 15px;
   font-family: 'Poppins', sans-serif;
 

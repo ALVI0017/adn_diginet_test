@@ -7,6 +7,10 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth import get_user_model
+from django.views.generic import (TemplateView, CreateView,
+                                  ListView, DeleteView,
+                                  DetailView)
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 User = get_user_model()
 # Create your views here.
@@ -62,11 +66,20 @@ class SignIn(View):
 class LogoutView(View):
     def get(self, request):
         logout(request)
-        return redirect(to='/')
-# TO DO sign up view
+        return redirect(to='account:sign_in')
 
-# TO DO login view
-# TO DO logout
-# TO DO user profile
-# TO DO user update
-# TO DO user password
+
+# user list
+
+class UserList(ListView, LoginRequiredMixin):
+    model = User
+    context_object_name = 'user_list'
+    # template_name = 'blog/blog_list.html'
+    template_name = "account/user_list.html"
+    paginate_by = 5
+
+
+class UserDelete(DeleteView, LoginRequiredMixin):
+    model = User
+    success_url = reverse_lazy('account:user_list')
+    template_name = "account/delete.html"
