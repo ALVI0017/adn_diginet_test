@@ -12,7 +12,9 @@ urlpatterns = [
     path("details/<slug:slug>/", PostDetails.as_view(),
          {'document_root': settings.MEDIA_URL}, name="post_details"),
     path("like/<slug:slug>", LikeView, name='like_post'),
-    path("post/<slug:slug>/comment/", CommentView, name='post_comment')
+    path("<slug:slug>/comment/", CommentView, name='post_comment'),
+    path('<slug:slug>/delete/', PostDelete.as_view(), name="delete_post"),
+
 
     # path("about/", views.AboutUs, name="about"),
 

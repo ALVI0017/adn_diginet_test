@@ -1,0 +1,13 @@
+{% extends 'component/base.html' %}
+{% load static %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+<section class="contact_section ">
+    <form method="post">{% csrf_token %}
+        <p>Are you sure you want to delete "{{ object }}"?</p>
+        <input type="submit" value="Confirm">
+    </form>
+</section>
+
+{% endblock content %}

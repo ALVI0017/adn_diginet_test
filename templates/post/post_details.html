@@ -4,6 +4,9 @@
 {% load crispy_forms_tags %}
 
 <section class="contact_section ">
+    {%if post.author.id == request.user.id%}
+    <b><a style="color:red" href="{% url 'post:delete_post' post.slug %}"> Delete</a></b>
+    {%endif%}
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-12">
@@ -57,7 +60,6 @@
                                 <!-- <button type="submit", name="slug", value="{{ post.slug }}" class="btn btn-primary"> 
                                     Unlike
                                 </button> -->
-
                                 {% else %}
                                 <input type="image" src="{% static '' %}images/unliked.png" name="submit"
                                     width="50px" />

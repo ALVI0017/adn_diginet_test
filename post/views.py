@@ -81,8 +81,9 @@ def LikeView(request, slug):
 
 
 class PostDelete(DeleteView):
-    model = Post
+    model = Posts
     success_url = reverse_lazy('post:post_list')
+    template_name = "post/delete.html"
 
 
 def CommentView(request, slug):
